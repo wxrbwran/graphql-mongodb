@@ -28,7 +28,7 @@ export class StudentService {
     return this.studentRepository.find();
   }
 
-  async remove(id: string): Promise<Student> {
+  async removeStudentById(id: string): Promise<Student> {
     const student = await this.getStudent(id);
     this.studentRepository.remove(student);
     return student;

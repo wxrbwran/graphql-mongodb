@@ -25,7 +25,7 @@ export class StudentResolver {
   }
 
   @Mutation((returns) => StudentType)
-  async remove(@Args('id') id: string) {
-    return this.studentService.remove(id);
+  async removeStudentById(@Args('id') id: string) {
+    return this.studentService.removeStudentById(id);
   }
 }
