@@ -1,0 +1,82 @@
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "h class"
+      startDate: "2022-05-04T12:00:00Z"
+      endDate: "2022-05-04T12:01:00Z"
+      students: [
+        "1efdb438-c7cd-4247-a890-f14a02765b09"
+        "ee84be33-8499-47ab-91bf-c55a7dd0d6a5"
+      ]
+    }
+  ) {
+    name
+    id
+  }
+}
+
+query {
+  lesson(id: "e471eca6-85c0-41c8-a51b-6f19f9c5220c") {
+    name
+    startDate
+    students {
+      firstName
+      lastName
+    }
+  }
+}
+
+query {
+  lessons {
+    id
+    name
+    students {
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation {
+  createStudent(createStudentInput: { firstName: "wu", lastName: "xiaoran1" }) {
+    id
+    firstName
+    lastName
+  }
+}
+
+query {
+  student(id: "1efdb438-c7cd-4247-a890-f14a02765b09") {
+    firstName
+    lastName
+  }
+}
+
+query {
+  students {
+    id
+    firstName
+    lastName
+  }
+}
+
+mutation {
+  removeLessonById(id: "0da163bb-14e4-40c2-a33e-a7ce925c4a59") {
+    name
+  }
+}
+
+mutation {
+  assignStudentsToLesson(
+    assignInput: {
+      lessonId: "44f5c9b9-9afc-4904-9f42-d89ffa6fb872"
+      studentIds: [
+        "1efdb438-c7cd-4247-a890-f14a02765b09"
+        "ee84be33-8499-47ab-91bf-c55a7dd0d6a5"
+      ]
+    }
+  ) {
+    id
+    name
+  }
+}
