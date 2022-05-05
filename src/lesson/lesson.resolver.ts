@@ -10,7 +10,7 @@ import {
   ResolveField,
   Parent,
 } from '@nestjs/graphql';
-import { CreateLessonDTO } from './create-lesson.dto';
+import { CreateLessonInput } from './create-lesson.input';
 import { AssignInput } from './assign-input';
 
 @Resolver((of) => LessonType)
@@ -33,8 +33,8 @@ export class LessonResolver {
     // @Args('name') name: string,
     // @Args('startDate') startDate: string,
     // @Args('endDate') endDate: string,
-    @Args({ name: 'createLessonDTO', type: () => CreateLessonDTO })
-    createLessonDTO: CreateLessonDTO,
+    @Args({ name: 'createLessonInput', type: () => CreateLessonInput })
+    createLessonDTO: CreateLessonInput,
   ) {
     return this.lessonService.createLesson(createLessonDTO);
   }

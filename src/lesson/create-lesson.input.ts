@@ -2,7 +2,7 @@ import { Field, ID, InputType } from '@nestjs/graphql';
 import { IsDateString, IsUUID, MinLength } from 'class-validator';
 
 @InputType()
-export class CreateLessonDTO {
+export class CreateLessonInput {
   @MinLength(2)
   @Field()
   name: string;

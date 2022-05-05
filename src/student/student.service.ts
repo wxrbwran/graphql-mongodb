@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
-import { CreateStudentDTO } from './create-student.dto';
+import { CreateStudentInput } from './create-student.input';
 
 import { Student } from './student.entity';
 
@@ -13,7 +13,7 @@ export class StudentService {
     private readonly studentRepository: Repository<Student>,
   ) {}
 
-  async createStudent(createStudentDTO: CreateStudentDTO): Promise<Student> {
+  async createStudent(createStudentDTO: CreateStudentInput): Promise<Student> {
     const lesson = this.studentRepository.create({
       id: uuid(),
       ...createStudentDTO,

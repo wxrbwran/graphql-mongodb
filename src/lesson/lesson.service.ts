@@ -1,5 +1,5 @@
 import { Student } from './../student/student.entity';
-import { CreateLessonDTO } from './create-lesson.dto';
+import { CreateLessonInput } from './create-lesson.input';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { v4 as uuid } from 'uuid';
@@ -15,7 +15,7 @@ export class LessonService {
     private readonly studentService: StudentService,
   ) {}
 
-  async createLesson(createLessonDTO: CreateLessonDTO): Promise<Lesson> {
+  async createLesson(createLessonDTO: CreateLessonInput): Promise<Lesson> {
     const lesson = this.lessonRepository.create({
       id: uuid(),
       ...createLessonDTO,
