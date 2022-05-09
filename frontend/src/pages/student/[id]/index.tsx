@@ -1,5 +1,4 @@
 import { useParams } from 'umi';
-
 import { useQuery, gql } from '@apollo/client';
 
 const GET_STUDENT = gql`

@@ -10,4 +10,7 @@ export class StudentType {
 
   @Field()
   lastName: string;
+
+  @Field()
+  token: string;
 }

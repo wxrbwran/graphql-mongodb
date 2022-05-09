@@ -1,14 +1,40 @@
-import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Input, Button } from 'antd';
+import { history } from 'umi';
+import { gql, useLazyQuery } from '@apollo/client';
+
+const SIGNIN = gql`
+  query signIn($firstName: String!, $lastName: String!) {
+    signIn(createStudentInput: { firstName: $firstName, lastName: $lastName }) {
+      id
+      token
+    }
+  }
+`;
 
 export default function SignIn() {
+  const [signIn, { error, data, loading }] = useLazyQuery(SIGNIN);
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    signIn({
+      variables: values,
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
+  useEffect(() => {
+    console.log(data);
+    if (data) {
+      localStorage.setItem('token', data.signIn.token);
+      history.push({
+        pathname: 'students',
+      });
+    }
+  }, [data]);
 
   return (
     <Form
@@ -22,24 +48,20 @@ export default function SignIn() {
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        label="firstName"
+        name="firstName"
+        rules={[{ required: true }]}
       >
         <Input />
       </Form.Item>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password />
+      <Form.Item label="lastName" name="lastName" rules={[{ required: true }]}>
+        <Input />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          登录
         </Button>
       </Form.Item>
     </Form>
